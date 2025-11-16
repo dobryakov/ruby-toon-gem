@@ -26,6 +26,10 @@ The result should be a ready-to-use solution to use gem by github link and to pu
 - Q: How should decode errors be surfaced by default? → A: Raise typed exceptions by default; offer non-raising variant returning DecodeResult.
 - Q: How should NaN and Infinity be handled on encode? → A: Disallow on encode (raise); allow decode if spec-valid with diagnostics.
 - Q: How should duplicate map keys be handled during decode? → A: Raise error by default; optional last-wins policy via options.
+- Q: What license should the gem use? → A: MIT
+- Q: How should the TOON spec version be tracked? → A: Pin to latest stable tag at release (e.g., v1.0.0)
+- Q: What Ruby version should be targeted? → A: Ruby 3.2.x
+- Q: What Rails version should the demo/E2E app target? → A: Rails 7.1.x
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -102,12 +106,16 @@ As a maintainer, I can run a comprehensive test suite (unit + E2E) that validate
 - **FR-011**: API Stability: Public methods MUST be clearly versioned and documented to avoid breaking changes without a major version bump.
 - **FR-012**: Developer Ergonomics: Provide helpful exceptions for unsupported types with guidance for conversion.
 - **FR-013**: TOON Version: Compliance baseline MUST follow the latest stable tag on `toon-format/toon`.
+  Pin the implementation and tests to the latest stable tag at release time (e.g., v1.0.0) for deterministic behavior. Update the pin on new releases with changelog notes.
 - **FR-014**: Streaming/IO: Version 1 MUST support in-memory buffers only; streaming/IO is deferred to a later version.
 - **FR-015**: Default Strictness: Decoder is permissive by default and accepts non-canonical but spec-valid inputs; it normalizes to canonical form and surfaces normalization via diagnostics/warnings. Encoder MUST always produce canonical output by default.
 - **FR-016**: Encoder Output Type: By default, `encode` returns a Ruby `String` with UTF-8 encoding documented as binary-safe. Guidance MUST explain safe handling for transport (e.g., base64) and provide an option in `CodecOptions` to return an ASCII-8BIT binary string if preferred.
 - **FR-017**: Error Handling: `decode` raises well-typed exceptions on malformed/non-compliant input by default. A non-raising API variant (e.g., `decode_safe`) MUST return a `DecodeResult` containing error details without raising.
 - **FR-018**: Special Floats: `encode` MUST raise on NaN and ±Infinity by default. `decode` MAY accept these if present and spec-valid, returning normalized numeric semantics if defined by TOON or surfacing explicit diagnostics otherwise. Provide an option in `CodecOptions` to choose strict rejection.
 - **FR-019**: Duplicate Map Keys: `decode` MUST raise on duplicate keys by default. Provide a configurable policy in `CodecOptions` (e.g., `:last_wins`) which, when enabled, accepts duplicates, keeps the last occurrence deterministically, and records a diagnostic.
+- **FR-020**: Licensing: The gem MUST be released under the MIT license; include `license` metadata in the gemspec and a `LICENSE` file in the repository.
+- **FR-021**: Runtime Version: The project MUST target Ruby 3.2.x as the baseline runtime across development, CI, and docker images.
+- **FR-022**: Rails Demo Version: The Rails demo/E2E application MUST target Rails 7.1.x, aligned with the Ruby 3.2.x baseline.
 
 ### Key Entities *(include if feature involves data)*
 
