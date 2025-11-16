@@ -7,19 +7,19 @@
 
 ## Summary
 
-Implement a Ruby gem that encodes and decodes data per the TOON specification with tests and Dockerized CI/E2E. The gem exposes simple `encode`/`decode` APIs, returns UTF-8 strings by default (binary-safe), provides strictness options, and includes a Rails demo app for end-to-end tests. Technical approach: pure Ruby implementation with clear type mapping, canonicalizing encode, permissive decode with diagnostics, and contract-tested via a Rails container.
+Implement a Ruby gem that encodes and decodes data per the TOON specification with tests and Dockerized CI/E2E. The gem exposes simple `encode`/`decode` APIs, returns UTF-8 strings by default (binary-safe), provides strictness options, and includes a Rails-based demo app used only as an internal test harness (no HTTP API). Technical approach: pure Ruby implementation with clear type mapping, canonicalizing encode, permissive decode with diagnostics, and containerized tests (including Rails-based tests) exercising the gem internally.
 
 ## Technical Context
 
 **Language/Version**: Ruby (NEEDS CLARIFICATION exact version; propose 3.2.x)  
 **Primary Dependencies**: Bundler, Rake, RSpec (runtime: none/minimal), Rails (demo app only)  
 **Storage**: N/A (in-memory encoding/decoding only)  
-**Testing**: RSpec for unit; Rails app specs/request tests for E2E in separate container  
+**Testing**: RSpec for unit; Rails app tests (without HTTP endpoints) for E2E-style coverage in a separate container  
 **Target Platform**: Linux containers (docker-compose; CI headless)  
-**Project Type**: Single library (gem) + separate Rails demo app for E2E  
+**Project Type**: Single library (gem) + separate Rails demo app used as an internal test harness  
 **Performance Goals**: Encode/decode ≤ 1KB payloads under 100 ms locally (FR-010)  
 **Constraints**: Fully Dockerized; compose-first; no hardcoded ports; CI executes containerized test suite  
-**Scale/Scope**: Library-sized codebase; demo Rails app limited to simple encode/decode endpoints  
+**Scale/Scope**: Library-sized codebase; demo Rails app limited to internal encode/decode tests (no HTTP API)  
 **TOON Version Pin**: NEEDS CLARIFICATION (pin to latest stable tag from `toon-format/toon`)  
 **Numeric Handling**: Use Integer/Float; consider `BigDecimal` for precise cases (documented) (NEEDS CLARIFICATION threshold)  
 **Binary Output Option**: ASCII-8BIT variant behind `CodecOptions` (FR-016)  
@@ -43,8 +43,8 @@ Planned Compliance (pre-design):
 - Release workflow will package the gem with semver metadata and README guidance.
 
 Post-Design Re-check:
-- Design artifacts added: `research.md`, `data-model.md`, `contracts/openapi.yaml`, `quickstart.md`.
-- These support the gates by defining Dockerized operation, Rails E2E scope, tests, and CI usage.
+- Design artifacts added: `research.md`, `data-model.md`, `quickstart.md`.
+- These support the gates by defining Dockerized operation, internal Rails-based tests, and CI usage.
 
 ## Project Structure
 
@@ -56,7 +56,6 @@ specs/001-implement-toon-gem/
 ├── research.md          # Phase 0 output (/speckit.plan command)
 ├── data-model.md        # Phase 1 output (/speckit.plan command)
 ├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
 └── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
@@ -87,13 +86,12 @@ rails_app/
 ├── Gemfile
 ├── config/
 ├── app/
-│   └── controllers/
-│       └── codec_controller.rb
+│   └── lib/             # or other internal modules using the gem (no HTTP controllers)
 └── spec/
-    └── requests/
+    └── toon/           # Rails-based tests that exercise the gem internally
 ```
 
-**Structure Decision**: Single library (gem) with a separate Rails application for E2E tests, both orchestrated via docker-compose as per Constitution. The documentation and contracts live under `specs/001-implement-toon-gem/`.
+**Structure Decision**: Single library (gem) with a separate Rails application used as an internal test harness (no HTTP API), both orchestrated via docker-compose as per Constitution. The documentation for this feature lives under `specs/001-implement-toon-gem/`.
 
 ## Complexity Tracking
 

@@ -6,9 +6,9 @@ description: "Task list for implementing the Ruby TOON Gem feature"
 ## Tasks: Ruby TOON Gem (encode/decode, tests, publish)
 
 **Input**: Design documents from `/home/ubuntu/ruby-toon-gem/specs/001-implement-toon-gem/`  
-**Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `contracts/openapi.yaml`, `quickstart.md`
+**Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `quickstart.md`
 
-**Tests**: Automated tests are **required** (unit + integration + E2E via Rails and docker-compose).
+**Tests**: Automated tests are **required** (unit + integration + Rails-based container tests via docker-compose).
 
 **Organization**: Tasks are grouped by user story so each story can be implemented and tested independently.
 
@@ -97,27 +97,27 @@ Every task uses:
 
 ## Phase 5: User Story 3 – Confidence via spec-aligned tests (Priority: P3)
 
-**Goal**: Provide comprehensive test coverage (unit + E2E via Rails) and CI automation to prevent regressions.
+**Goal**: Provide comprehensive test coverage (unit + Rails-based container tests without HTTP APIs) and CI automation to prevent regressions.
 
-**Independent Test**: CI executes gem unit tests and Rails request specs against docker-compose services, all passing.
+**Independent Test**: CI executes gem unit tests and Rails-based specs that exercise the gem internally via docker-compose, all passing.
 
 ### Tests for User Story 3
 
-- [ ] T026 [P] [US3] Add request specs for `/encode` endpoint (success and error cases) in `/home/ubuntu/ruby-toon-gem/rails_app/spec/requests/encode_spec.rb`
-- [ ] T027 [P] [US3] Add request specs for `/decode` endpoint including `mode=default` and `mode=safe` in `/home/ubuntu/ruby-toon-gem/rails_app/spec/requests/decode_spec.rb`
-- [ ] T028 [P] [US3] Add contract tests to assert Rails responses conform to `contracts/openapi.yaml` in `/home/ubuntu/ruby-toon-gem/rails_app/spec/contracts/openapi_spec.rb`
-- [ ] T029 [P] [US3] Add CI job to run gem unit specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
-- [ ] T030 [P] [US3] Add CI job to run Rails request/contract specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
+- [ ] T026 [P] [US3] Add Rails-based specs that call the gem’s encode/decode APIs internally in `/home/ubuntu/ruby-toon-gem/rails_app/spec/toon/codec_spec.rb`
+- [ ] T027 [P] [US3] Add Rails integration specs that compose typical workflows using the gem (no HTTP routing) in `/home/ubuntu/ruby-toon-gem/rails_app/spec/toon/integration_spec.rb`
+- [ ] T028 [P] [US3] Add CI job to run gem unit specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
+- [ ] T029 [P] [US3] Add CI job to run Rails-based specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
+- [ ] T030 [P] [US3] Add smoke test script that runs both gem and Rails specs locally via a single command in `/home/ubuntu/ruby-toon-gem/scripts/smoke_tests.sh`
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Implement `CodecController` with `/encode` and `/decode` actions that delegate to the gem in `/home/ubuntu/ruby-toon-gem/rails_app/app/controllers/codec_controller.rb`
-- [ ] T032 [US3] Configure Rails routes for `/encode` and `/decode` endpoints in `/home/ubuntu/ruby-toon-gem/rails_app/config/routes.rb`
-- [ ] T033 [US3] Configure Rails app to use the gem from local path or installed gem in `/home/ubuntu/ruby-toon-gem/rails_app/Gemfile`
-- [ ] T034 [US3] Add centralized error handling for TOON errors and diagnostics logging in `/home/ubuntu/ruby-toon-gem/rails_app/app/controllers/application_controller.rb` (or a dedicated concern)
-- [ ] T035 [US3] Configure health checks and logging options for gem and Rails services in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
+- [ ] T031 [US3] Implement internal Rails module or service that wraps gem encode/decode usage in `/home/ubuntu/ruby-toon-gem/rails_app/app/lib/toon_codec.rb`
+- [ ] T032 [US3] Configure Rails app to load and use the gem from local path or installed gem in `/home/ubuntu/ruby-toon-gem/rails_app/Gemfile`
+- [ ] T033 [US3] Add centralized error handling and diagnostics logging for gem-related failures in `/home/ubuntu/ruby-toon-gem/rails_app/app/lib/toon_codec.rb`
+- [ ] T034 [US3] Configure health checks and logging options for gem and Rails services in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
+- [ ] T035 [US3] Document how to run all tests (gem + Rails) via docker-compose in `/home/ubuntu/ruby-toon-gem/README.md`
 
-**Checkpoint**: All tests (unit and E2E) pass locally and in CI, validating TOON spec alignment.
+**Checkpoint**: All tests (unit and Rails-based container tests) pass locally and in CI, validating TOON spec alignment.
 
 ---
 
@@ -148,13 +148,13 @@ Every task uses:
 
 - **User Story 1 (P1)**: Can start after Phase 2; no dependencies on other stories.
 - **User Story 2 (P2)**: Can start after Phase 2; uses the public APIs from User Story 1 but remains independently testable via README and example project.
-- **User Story 3 (P3)**: Can start after Phase 2; depends on User Story 1 APIs and Rails foundation, but tests (Rails request/contract specs and CI) should be independently runnable.
+- **User Story 3 (P3)**: Can start after Phase 2; depends on User Story 1 APIs and Rails foundation, but tests (Rails-based specs and CI) should be independently runnable.
 
 ### Within Each User Story
 
 - Tests MUST be written and observed failing before implementing or wiring production code.
 - Implement core entities and options (e.g., `CodecOptions`) before encoder/decoder logic.
-- Implement encoder/decoder before exposing final public APIs or Rails endpoints.
+- Implement encoder/decoder before exposing final public APIs or Rails-based integration helpers.
 - Complete the user story and its tests before moving to the next story’s implementation.
 
 ### Parallel Opportunities
@@ -197,7 +197,7 @@ Task: "Implement Toon::Decoder in gem/lib/toon/decoder.rb"                      
 
 1. Deliver MVP with User Story 1 (core encode/decode).
 2. Add User Story 2 to enable easy installation and packaging, then validate via example project and README tests.
-3. Add User Story 3 to harden coverage with Rails E2E tests and CI, then validate via automated pipelines.
+3. Add User Story 3 to harden coverage with Rails-based container tests and CI, then validate via automated pipelines.
 4. Apply Final Phase tasks for polish and performance tuning.
 
 ### Parallel Team Strategy
@@ -208,7 +208,7 @@ With multiple developers:
 2. Assign:
    - Developer A: User Story 1 (core encode/decode + unit tests).
    - Developer B: User Story 2 (packaging, README, example project).
-   - Developer C: User Story 3 (Rails demo, contract tests, CI).
+   - Developer C: User Story 3 (Rails demo as internal test harness, Rails-based specs, CI).
 3. Coordinate on public API stability and TOON spec pinning while keeping story tests independent.
 
 

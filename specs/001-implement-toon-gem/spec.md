@@ -65,16 +65,16 @@ As a developer, I can add the gem via a GitHub source or RubyGems, require it, a
 
 ### User Story 3 - Confidence via spec-aligned tests (Priority: P3)
 
-As a maintainer, I can run a comprehensive test suite (unit + E2E) that validates TOON spec compliance and typical edge cases, so regressions are caught before release.
+As a maintainer, I can run a comprehensive test suite (unit + containerized Rails-based tests without HTTP APIs) that validates TOON spec compliance and typical edge cases, so regressions are caught before release.
 
 **Why this priority**: Ensures long-term reliability and compliance.
 
-**Independent Test**: CI executes unit tests for encode/decode and E2E tests via a demo Rails container that round-trips payloads through controller endpoints.
+**Independent Test**: CI executes unit tests for encode/decode and containerized Rails tests that call the gem internally (no HTTP endpoints exposed), validating typical and edge cases.
 
 **Acceptance Scenarios**:
 
 1. **Given** the repository, **When** CI runs, **Then** unit tests for encoding/decoding pass with 100% of defined round-trip cases.
-2. **Given** docker-compose, **When** E2E tests run against the Rails demo app using the gem, **Then** requests round-trip payloads without data loss and return HTTP 2xx.
+2. **Given** docker-compose, **When** containerized Rails-based tests run against code paths that use the gem internally, **Then** payloads round-trip without data loss and all tests pass.
 
 ---
 
@@ -101,7 +101,7 @@ As a maintainer, I can run a comprehensive test suite (unit + E2E) that validate
 - **FR-006**: Documentation: README MUST include installation (GitHub and RubyGems), quick-start examples, supported types matrix, and error semantics.
 - **FR-007**: Packaging: Gem MUST be publishable to RubyGems with semantic versioning and license metadata.
 - **FR-008**: Testing: Automated tests MUST cover typical types, nested structures, edge cases, and failure cases; CI MUST run tests headlessly.
-- **FR-009**: E2E: A sample Rails container MUST demonstrate using the gem to encode/decode payloads via HTTP endpoints in docker-compose.
+- **FR-009**: E2E: A sample Rails container MUST demonstrate using the gem to encode/decode payloads via internal Rails tests (no external HTTP API surface) in docker-compose.
 - **FR-010**: Performance: Typical payloads (≤ 1 KB) SHOULD encode/decode in under 100 ms on a standard developer machine.
 - **FR-011**: API Stability: Public methods MUST be clearly versioned and documented to avoid breaking changes without a major version bump.
 - **FR-012**: Developer Ergonomics: Provide helpful exceptions for unsupported types with guidance for conversion.
@@ -129,5 +129,5 @@ As a maintainer, I can run a comprehensive test suite (unit + E2E) that validate
 
 - **SC-001**: 100% of defined round-trip tests for supported types pass in CI on first release.
 - **SC-002**: Developers can install the library via GitHub or RubyGems and run README examples successfully in under 5 minutes.
-- **SC-003**: E2E demo application round-trips payloads through HTTP with zero data loss and all acceptance scenarios passing.
+- **SC-003**: E2E demo application round-trips payloads through internal Rails-based tests with zero data loss and all acceptance scenarios passing.
 - **SC-004**: For typical payloads (≤ 1 KB), encode/decode actions complete promptly during local development (perceptibly instant under normal conditions).
