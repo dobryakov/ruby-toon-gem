@@ -1,0 +1,13 @@
+Constitution:
+
+You do the ruby on rails GEM.
+Make all work inside a docker container.
+Setup and use the rails application in separate docker container for testing the gem inside real rails application by automated tests.
+
+Feature:
+
+You do the ruby gem accoding to the TOON standart specification https://github.com/toon-format/toon
+Provide support for typical types of the data.
+Cover it by automated tests.
+Provide the ready-to-use solution to use gem by github link and to publish the gem to the https://rubygems.org/
+
