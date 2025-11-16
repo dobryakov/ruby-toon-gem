@@ -18,10 +18,10 @@ bundle install
 
 ### From GitHub
 
-Until published to RubyGems you can depend on the GitHub repository:
+Until published to RubyGems you can depend on the GitHub repository (note the `gem` subdirectory):
 
 ```ruby
-gem "toon", git: "https://github.com/dobryakov/ruby-toon-gem"
+gem "toon", git: "https://github.com/dobryakov/ruby-toon-gem", subdir: "gem"
 ```
 
 ### From local path (for development)
