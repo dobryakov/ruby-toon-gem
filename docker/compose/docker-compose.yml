@@ -29,6 +29,7 @@ services:
     working_dir: /usr/src/app
     volumes:
       - ../../rails_app:/usr/src/app
+      - ../../gem:/usr/src/gem
     env_file:
       - ../../.env
     ports:
