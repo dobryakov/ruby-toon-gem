@@ -125,7 +125,6 @@ Every task uses:
 
 **Purpose**: Improve documentation, robustness, performance, and developer experience across stories.
 
-- [ ] T036 [P] Refine documentation and validate quickstart commands in `/home/ubuntu/ruby-toon-gem/README.md` and `/home/ubuntu/ruby-toon-gem/specs/001-implement-toon-gem/quickstart.md`
 - [X] T036 [P] Refine documentation and validate quickstart commands in `/home/ubuntu/ruby-toon-gem/README.md` and `/home/ubuntu/ruby-toon-gem/specs/001-implement-toon-gem/quickstart.md`
 - [X] T037 Perform code cleanup and refactoring for clarity and maintainability in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/`
 - [X] T038 [P] Add additional edge-case unit tests (deep nesting, Unicode, duplicate keys, invalid payloads) in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/edge_cases_spec.rb`

@@ -30,5 +30,8 @@ DEPENDENCIES
   rspec
   toon!
 
+RUBY VERSION
+   ruby 3.2.9p265
+
 BUNDLED WITH
    2.4.19
