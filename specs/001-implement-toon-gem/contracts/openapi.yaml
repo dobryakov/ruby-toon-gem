@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: TOON Codec Demo API
+  version: 1.0.0
+  description: Rails demo app exposing encode/decode endpoints backed by the TOON Ruby gem.
+servers:
+  - url: http://localhost:${RAILS_PORT}
+paths:
+  /encode:
+    post:
+      summary: Encode a Ruby-like JSON payload to TOON
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        "200":
+          description: Encoded TOON value
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  encoded:
+                    type: string
+                    description: UTF-8 string representation (binary-safe) unless binary option enabled
+        "400":
+          description: Validation or unsupported type error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /decode:
+    post:
+      summary: Decode a TOON-encoded string to a Ruby-like JSON payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [encoded]
+              properties:
+                encoded:
+                  type: string
+                mode:
+                  type: string
+                  enum: [default, safe]
+                  default: default
+      responses:
+        "200":
+          description: Decoded Ruby-like value
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    description: Decoded structure
+                  diagnostics:
+                    type: array
+                    items:
+                      type: string
+        "400":
+          description: Malformed input or duplicate keys (default policy)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+

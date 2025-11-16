@@ -1,0 +1,29 @@
+# ruby-toon-gem Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-11-16
+
+## Active Technologies
+
+- Bundler, Rake, RSpec (runtime: none/minimal), Rails (demo app only) (001-implement-toon-gem)
+
+## Project Structure
+
+```text
+src/
+tests/
+```
+
+## Commands
+
+# Add commands for 
+
+## Code Style
+
+: Follow standard conventions
+
+## Recent Changes
+
+- 001-implement-toon-gem: Added Bundler, Rake, RSpec (runtime: none/minimal), Rails (demo app only)
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
