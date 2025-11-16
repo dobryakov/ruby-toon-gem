@@ -9,14 +9,14 @@ rescue LoadError
 end
 
 namespace :gem do
-  desc "Build the toon gem"
+  desc "Build the toon-rb gem"
   task :build do
     sh "gem build toon.gemspec"
   end
 
-  desc "Build and push the toon gem to RubyGems (requires credentials)"
+  desc "Build and push the toon-rb gem to RubyGems (requires credentials)"
   task :release => :build do
-    pkg = Dir["toon-*.gem"].max
+    pkg = Dir["toon-rb-*.gem"].max
     abort "No built gem found" unless pkg
     sh "gem push #{pkg}"
   end
