@@ -7,7 +7,9 @@ Setup and use the rails application in separate docker container for testing the
 Feature:
 
 You do the ruby gem accoding to the TOON standart specification https://github.com/toon-format/toon
-Provide support for typical types of the data.
-Cover it by automated tests.
-Provide the ready-to-use solution to use gem by github link and to publish the gem to the https://rubygems.org/
+Investigate a TOON specification before doing any work.
+Provide support for typical types of the data (strings, numbers, etc..)
+Provide both encoding and decoding functions.
+Cover it by the automated tests on differend kinds of data.
+The result should be a ready-to-use solution to use gem by github link and to publish the gem to the https://rubygems.org/
 

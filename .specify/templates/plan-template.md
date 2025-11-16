@@ -31,7 +31,12 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- The following gates derive from the repository Constitution and MUST pass:
+  - All commands run inside Docker containers via docker-compose (no host runs).
+  - A separate Rails application container is used to test the gem end-to-end.
+  - TOON specification compliance is covered by encode/decode tests across typical data types.
+  - CI executes the full containerized test suite headlessly.
+  - Release/versioning plan (semver) and migration notes exist for any breaking changes.
 
 ## Project Structure
 

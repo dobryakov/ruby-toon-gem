@@ -5,6 +5,13 @@
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
 
+## Constitution Constraints (must reflect in this spec)
+
+- Solution MUST be fully Dockerized and run via docker-compose.
+- End-to-end tests MUST exercise the gem via a separate Rails application container.
+- TOON spec compliance MUST be addressed (encode/decode for typical data types).
+- CI MUST run the containerized test suite headlessly.
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--
