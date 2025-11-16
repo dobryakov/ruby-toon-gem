@@ -16,10 +16,10 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build containers
-        run: docker-compose -f docker/compose/docker-compose.yml build gem
+        run: docker compose -f docker/compose/docker-compose.yml build gem
 
       - name: Run gem specs
-        run: docker-compose -f docker/compose/docker-compose.yml run --rm gem sh -lc 'bundle install && bundle exec rake spec'
+        run: docker compose -f docker/compose/docker-compose.yml run --rm gem sh -lc 'bundle install && bundle exec rake spec'
 
   rails-specs:
     runs-on: ubuntu-latest
@@ -33,9 +33,9 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build containers
-        run: docker-compose -f docker/compose/docker-compose.yml build rails_app
+        run: docker compose -f docker/compose/docker-compose.yml build rails_app
 
       - name: Run Rails specs
-        run: docker-compose -f docker/compose/docker-compose.yml run --rm rails_app sh -lc 'bundle install && bundle exec rspec'
+        run: docker compose -f docker/compose/docker-compose.yml run --rm rails_app sh -lc 'bundle install && bundle exec rspec'
 
 

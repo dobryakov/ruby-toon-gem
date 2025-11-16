@@ -1,4 +1,4 @@
-# Ruby TOON Gem
+# toon-rb Gem
 
 A Ruby gem providing TOON-style encode/decode functionality with simple `encode` / `decode` APIs and containerized test setup.
 
@@ -7,7 +7,7 @@ A Ruby gem providing TOON-style encode/decode functionality with simple `encode`
 Add this line to your application's `Gemfile`:
 
 ```ruby
-gem "toon"
+gem "toon-rb"
 ```
 
 And then execute:
@@ -18,16 +18,16 @@ bundle install
 
 ### From GitHub
 
-Until published to RubyGems you can depend on the GitHub repository (note the `gem` subdirectory):
+You can also depend on the GitHub repository (note the `gem` subdirectory):
 
 ```ruby
-gem "toon", git: "https://github.com/dobryakov/ruby-toon-gem", subdir: "gem"
+gem "toon-rb", git: "https://github.com/dobryakov/ruby-toon-gem", subdir: "gem"
 ```
 
 ### From local path (for development)
 
 ```ruby
-gem "toon", path: "path/to/ruby-toon-gem/gem"
+gem "toon-rb", path: "path/to/ruby-toon-gem/gem"
 ```
 
 ## Usage
