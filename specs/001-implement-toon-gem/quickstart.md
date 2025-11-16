@@ -23,12 +23,17 @@ docker-compose -f docker/compose/docker-compose.yml up -d
 
 ## Unit Tests (Gem)
 ```bash
-docker-compose -f docker/compose/docker-compose.yml run --rm gem rake spec
+docker-compose -f docker/compose/docker-compose.yml run --rm gem sh -lc 'bundle install && bundle exec rake spec'
 ```
 
 ## E2E Tests (Rails Demo)
 ```bash
-docker-compose -f docker/compose/docker-compose.yml run --rm rails_app bundle exec rspec
+docker-compose -f docker/compose/docker-compose.yml run --rm rails_app sh -lc 'bundle install && bundle exec rspec'
+```
+
+## Smoke Tests (Gem + Rails)
+```bash
+./scripts/smoke_tests.sh
 ```
 
 ## Rebuild Guidance

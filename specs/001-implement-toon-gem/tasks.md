@@ -57,17 +57,17 @@ Every task uses:
 
 ### Tests for User Story 1
 
-- [ ] T012 [P] [US1] Add unit tests for encoder happy-path types (strings, integers, floats, booleans, nil, arrays, hashes) in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/encoder_spec.rb`
-- [ ] T013 [P] [US1] Add unit tests for decoder round-trip behavior and canonicalization in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/decoder_spec.rb`
-- [ ] T014 [P] [US1] Add unit tests for error handling (unsupported types, NaN/Infinity, malformed input) in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/error_handling_spec.rb`
+- [X] T012 [P] [US1] Add unit tests for encoder happy-path types (strings, integers, floats, booleans, nil, arrays, hashes) in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/encoder_spec.rb`
+- [X] T013 [P] [US1] Add unit tests for decoder round-trip behavior and canonicalization in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/decoder_spec.rb`
+- [X] T014 [P] [US1] Add unit tests for error handling (unsupported types, NaN/Infinity, malformed input) in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/error_handling_spec.rb`
 
 ### Implementation for User Story 1
 
-- [ ] T015 [P] [US1] Implement typed error classes for TOON encoding/decoding failures in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/errors.rb`
-- [ ] T016 [P] [US1] Implement `CodecOptions` entity and defaults (binary output, special float rejection, duplicate key policy) in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/codec_options.rb`
-- [ ] T017 [P] [US1] Implement `Toon::Encoder` with canonical TOON encode behavior for supported Ruby types in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/encoder.rb`
-- [ ] T018 [P] [US1] Implement `Toon::Decoder` with permissive decode and diagnostics support in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/decoder.rb`
-- [ ] T019 [US1] Expose public `encode`, `decode`, and `decode_safe` APIs in `/home/ubuntu/ruby-toon-gem/gem/lib/toon.rb` and ensure they are wired into `/home/ubuntu/ruby-toon-gem/gem/toon.gemspec`
+- [X] T015 [P] [US1] Implement typed error classes for TOON encoding/decoding failures in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/errors.rb`
+- [X] T016 [P] [US1] Implement `CodecOptions` entity and defaults (binary output, special float rejection, duplicate key policy) in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/codec_options.rb`
+- [X] T017 [P] [US1] Implement `Toon::Encoder` with canonical TOON encode behavior for supported Ruby types in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/encoder.rb`
+- [X] T018 [P] [US1] Implement `Toon::Decoder` with permissive decode and diagnostics support in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/decoder.rb`
+- [X] T019 [US1] Expose public `encode`, `decode`, and `decode_safe` APIs in `/home/ubuntu/ruby-toon-gem/gem/lib/toon.rb` and ensure they are wired into `/home/ubuntu/ruby-toon-gem/gem/toon.gemspec`
 
 **Checkpoint**: User Story 1 is fully functional and testable independently via gem unit tests.
 
@@ -81,15 +81,15 @@ Every task uses:
 
 ### Tests for User Story 2
 
-- [ ] T020 [P] [US2] Create a minimal sample project consuming the gem via path/GitHub in `/home/ubuntu/ruby-toon-gem/examples/basic_usage/` with a script that runs encode/decode
-- [ ] T021 [P] [US2] Add integration test that executes README example code in `/home/ubuntu/ruby-toon-gem/gem/spec/integration/readme_example_spec.rb`
+- [X] T020 [P] [US2] Create a minimal sample project consuming the gem via path/GitHub in `/home/ubuntu/ruby-toon-gem/examples/basic_usage/` with a script that runs encode/decode
+- [X] T021 [P] [US2] Add integration test that executes README example code in `/home/ubuntu/ruby-toon-gem/gem/spec/integration/readme_example_spec.rb`
 
 ### Implementation for User Story 2
 
-- [ ] T022 [US2] Finalize gem metadata (name, summary, homepage, MIT license, required Ruby version) in `/home/ubuntu/ruby-toon-gem/gem/toon.gemspec`
-- [ ] T023 [US2] Write installation and quick-start usage sections for GitHub and RubyGems in `/home/ubuntu/ruby-toon-gem/README.md`
-- [ ] T024 [US2] Add Rake tasks to build and publish the gem to RubyGems in `/home/ubuntu/ruby-toon-gem/gem/Rakefile`
-- [ ] T025 [US2] Create changelog and versioning notes aligned with TOON spec pinning in `/home/ubuntu/ruby-toon-gem/CHANGELOG.md`
+- [X] T022 [US2] Finalize gem metadata (name, summary, homepage, MIT license, required Ruby version) in `/home/ubuntu/ruby-toon-gem/gem/toon.gemspec`
+- [X] T023 [US2] Write installation and quick-start usage sections for GitHub and RubyGems in `/home/ubuntu/ruby-toon-gem/README.md`
+- [X] T024 [US2] Add Rake tasks to build and publish the gem to RubyGems in `/home/ubuntu/ruby-toon-gem/gem/Rakefile`
+- [X] T025 [US2] Create changelog and versioning notes aligned with TOON spec pinning in `/home/ubuntu/ruby-toon-gem/CHANGELOG.md`
 
 **Checkpoint**: User Story 2 is complete when developers can follow README instructions to install and use the gem.
 
@@ -103,19 +103,19 @@ Every task uses:
 
 ### Tests for User Story 3
 
-- [ ] T026 [P] [US3] Add Rails-based specs that call the gem’s encode/decode APIs internally in `/home/ubuntu/ruby-toon-gem/rails_app/spec/toon/codec_spec.rb`
-- [ ] T027 [P] [US3] Add Rails integration specs that compose typical workflows using the gem (no HTTP routing) in `/home/ubuntu/ruby-toon-gem/rails_app/spec/toon/integration_spec.rb`
-- [ ] T028 [P] [US3] Add CI job to run gem unit specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
-- [ ] T029 [P] [US3] Add CI job to run Rails-based specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
-- [ ] T030 [P] [US3] Add smoke test script that runs both gem and Rails specs locally via a single command in `/home/ubuntu/ruby-toon-gem/scripts/smoke_tests.sh`
+- [X] T026 [P] [US3] Add Rails-based specs that call the gem’s encode/decode APIs internally in `/home/ubuntu/ruby-toon-gem/rails_app/spec/toon/codec_spec.rb`
+- [X] T027 [P] [US3] Add Rails integration specs that compose typical workflows using the gem (no HTTP routing) in `/home/ubuntu/ruby-toon-gem/rails_app/spec/toon/integration_spec.rb`
+- [X] T028 [P] [US3] Add CI job to run gem unit specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
+- [X] T029 [P] [US3] Add CI job to run Rails-based specs via docker-compose in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
+- [X] T030 [P] [US3] Add smoke test script that runs both gem and Rails specs locally via a single command in `/home/ubuntu/ruby-toon-gem/scripts/smoke_tests.sh`
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Implement internal Rails module or service that wraps gem encode/decode usage in `/home/ubuntu/ruby-toon-gem/rails_app/app/lib/toon_codec.rb`
-- [ ] T032 [US3] Configure Rails app to load and use the gem from local path or installed gem in `/home/ubuntu/ruby-toon-gem/rails_app/Gemfile`
-- [ ] T033 [US3] Add centralized error handling and diagnostics logging for gem-related failures in `/home/ubuntu/ruby-toon-gem/rails_app/app/lib/toon_codec.rb`
-- [ ] T034 [US3] Configure health checks and logging options for gem and Rails services in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
-- [ ] T035 [US3] Document how to run all tests (gem + Rails) via docker-compose in `/home/ubuntu/ruby-toon-gem/README.md`
+- [X] T031 [US3] Implement internal Rails module or service that wraps gem encode/decode usage in `/home/ubuntu/ruby-toon-gem/rails_app/app/lib/toon_codec.rb`
+- [X] T032 [US3] Configure Rails app to load and use the gem from local path or installed gem in `/home/ubuntu/ruby-toon-gem/rails_app/Gemfile`
+- [X] T033 [US3] Add centralized error handling and diagnostics logging for gem-related failures in `/home/ubuntu/ruby-toon-gem/rails_app/app/lib/toon_codec.rb`
+- [X] T034 [US3] Configure health checks and logging options for gem and Rails services in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
+- [X] T035 [US3] Document how to run all tests (gem + Rails) via docker-compose in `/home/ubuntu/ruby-toon-gem/README.md`
 
 **Checkpoint**: All tests (unit and Rails-based container tests) pass locally and in CI, validating TOON spec alignment.
 
@@ -126,10 +126,11 @@ Every task uses:
 **Purpose**: Improve documentation, robustness, performance, and developer experience across stories.
 
 - [ ] T036 [P] Refine documentation and validate quickstart commands in `/home/ubuntu/ruby-toon-gem/README.md` and `/home/ubuntu/ruby-toon-gem/specs/001-implement-toon-gem/quickstart.md`
-- [ ] T037 Perform code cleanup and refactoring for clarity and maintainability in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/`
-- [ ] T038 [P] Add additional edge-case unit tests (deep nesting, Unicode, duplicate keys, invalid payloads) in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/edge_cases_spec.rb`
-- [ ] T039 Optimize performance of critical encode/decode paths for ≤1KB payloads in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/encoder.rb` and `/home/ubuntu/ruby-toon-gem/gem/lib/toon/decoder.rb`
-- [ ] T040 Review security and dependency versions, updating `Gemfile` and `rails_app/Gemfile` in `/home/ubuntu/ruby-toon-gem/gem/Gemfile` and `/home/ubuntu/ruby-toon-gem/rails_app/Gemfile`
+- [X] T036 [P] Refine documentation and validate quickstart commands in `/home/ubuntu/ruby-toon-gem/README.md` and `/home/ubuntu/ruby-toon-gem/specs/001-implement-toon-gem/quickstart.md`
+- [X] T037 Perform code cleanup and refactoring for clarity and maintainability in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/`
+- [X] T038 [P] Add additional edge-case unit tests (deep nesting, Unicode, duplicate keys, invalid payloads) in `/home/ubuntu/ruby-toon-gem/gem/spec/unit/edge_cases_spec.rb`
+- [X] T039 Optimize performance of critical encode/decode paths for ≤1KB payloads in `/home/ubuntu/ruby-toon-gem/gem/lib/toon/encoder.rb` and `/home/ubuntu/ruby-toon-gem/gem/lib/toon/decoder.rb`
+- [X] T040 Review security and dependency versions, updating `Gemfile` and `rails_app/Gemfile` in `/home/ubuntu/ruby-toon-gem/gem/Gemfile` and `/home/ubuntu/ruby-toon-gem/rails_app/Gemfile`
 
 ---
 

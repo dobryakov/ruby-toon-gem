@@ -12,6 +12,7 @@ services:
       - "${GEM_PORT:-9401}:9401"
     environment:
       GEM_PORT: "${GEM_PORT:-9401}"
+      LOG_LEVEL: "${GEM_LOG_LEVEL:-info}"
     healthcheck:
       test: ["CMD", "ruby", "-v"]
       interval: 30s
@@ -35,6 +36,7 @@ services:
     environment:
       RAILS_ENV: test
       RAILS_PORT: "${RAILS_PORT:-9402}"
+      LOG_LEVEL: "${RAILS_LOG_LEVEL:-info}"
     depends_on:
       - gem
     healthcheck:

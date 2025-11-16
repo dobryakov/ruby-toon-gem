@@ -1,7 +1,6 @@
-require "rspec"
-
-$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "bundler/setup"
 require "toon"
+require_relative "../app/lib/toon_codec"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|

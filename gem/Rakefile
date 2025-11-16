@@ -8,6 +8,20 @@ rescue LoadError
   # RSpec not available yet; tasks will be defined after bundle install.
 end
 
+namespace :gem do
+  desc "Build the toon gem"
+  task :build do
+    sh "gem build toon.gemspec"
+  end
+
+  desc "Build and push the toon gem to RubyGems (requires credentials)"
+  task :release => :build do
+    pkg = Dir["toon-*.gem"].max
+    abort "No built gem found" unless pkg
+    sh "gem push #{pkg}"
+  end
+end
+
 task default: :spec
 
 
