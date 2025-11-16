@@ -1,5 +1,5 @@
 Gem::Specification.new do |spec|
-  spec.name          = "toon"
+  spec.name          = "toon-rb"
   spec.version       = "0.1.0"
   spec.authors       = ["Ruby TOON Gem"]
   spec.email         = ["grigoriydobryakov@gmail.com"]
