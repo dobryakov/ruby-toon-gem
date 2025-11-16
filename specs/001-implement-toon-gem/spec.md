@@ -17,6 +17,16 @@ The result should be a ready-to-use solution to use gem by github link and to pu
 - TOON spec compliance MUST be addressed (encode/decode for typical data types).
 - CI MUST run the containerized test suite headlessly.
 
+## Clarifications
+
+### Session 2025-11-16
+
+- Q: What should be the default strictness/canonical mode for the codec? → A: Permissive decode, canonicalize on encode.
+- Q: What output type should the encoder return by default? → A: UTF-8 String (binary-safe) with explicit documentation.
+- Q: How should decode errors be surfaced by default? → A: Raise typed exceptions by default; offer non-raising variant returning DecodeResult.
+- Q: How should NaN and Infinity be handled on encode? → A: Disallow on encode (raise); allow decode if spec-valid with diagnostics.
+- Q: How should duplicate map keys be handled during decode? → A: Raise error by default; optional last-wins policy via options.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Encode/decode typical data (Priority: P1)
@@ -72,6 +82,8 @@ As a maintainer, I can run a comprehensive test suite (unit + E2E) that validate
 - Null vs undefined semantics (map missing keys vs explicit null)
 - Duplicate keys in maps; key type constraints
 - Invalid payloads: truncated data, wrong type tags, overflow lengths; graceful decode errors
+- Special float values: Encoding NaN/Infinity MUST raise by default; decoding MAY accept if spec-valid and MUST record diagnostics/normalization notes.
+- Duplicate map keys: Default behavior MUST raise; permissive `CodecOptions` MAY enable last-wins with a diagnostic.
 
 ## Requirements *(mandatory)*
 
@@ -91,12 +103,17 @@ As a maintainer, I can run a comprehensive test suite (unit + E2E) that validate
 - **FR-012**: Developer Ergonomics: Provide helpful exceptions for unsupported types with guidance for conversion.
 - **FR-013**: TOON Version: Compliance baseline MUST follow the latest stable tag on `toon-format/toon`.
 - **FR-014**: Streaming/IO: Version 1 MUST support in-memory buffers only; streaming/IO is deferred to a later version.
+- **FR-015**: Default Strictness: Decoder is permissive by default and accepts non-canonical but spec-valid inputs; it normalizes to canonical form and surfaces normalization via diagnostics/warnings. Encoder MUST always produce canonical output by default.
+- **FR-016**: Encoder Output Type: By default, `encode` returns a Ruby `String` with UTF-8 encoding documented as binary-safe. Guidance MUST explain safe handling for transport (e.g., base64) and provide an option in `CodecOptions` to return an ASCII-8BIT binary string if preferred.
+- **FR-017**: Error Handling: `decode` raises well-typed exceptions on malformed/non-compliant input by default. A non-raising API variant (e.g., `decode_safe`) MUST return a `DecodeResult` containing error details without raising.
+- **FR-018**: Special Floats: `encode` MUST raise on NaN and ±Infinity by default. `decode` MAY accept these if present and spec-valid, returning normalized numeric semantics if defined by TOON or surfacing explicit diagnostics otherwise. Provide an option in `CodecOptions` to choose strict rejection.
+- **FR-019**: Duplicate Map Keys: `decode` MUST raise on duplicate keys by default. Provide a configurable policy in `CodecOptions` (e.g., `:last_wins`) which, when enabled, accepts duplicates, keeps the last occurrence deterministically, and records a diagnostic.
 
 ### Key Entities *(include if feature involves data)*
 
-- **EncodedValue**: The TOON-encoded representation produced by the encoder; carries bytes/length metadata.
-- **DecodeResult**: Parsed Ruby structure plus diagnostics on compliance or normalization performed.
-- **CodecOptions**: Optional flags for strictness, canonical encoding modes, and number handling.
+- **EncodedValue**: The TOON-encoded representation produced by the encoder; default type is Ruby `String` (UTF-8, binary-safe as documented), with length/bytes metadata and optional ASCII-8BIT variant via options.
+- **DecodeResult**: Parsed Ruby structure plus diagnostics on compliance or any canonicalization performed (including normalization warnings when defaults apply). When used by non-raising APIs, it MUST include error metadata fields.
+- **CodecOptions**: Optional flags for strictness, canonical encoding modes, number handling, and duplicate-key policy. Defaults: permissive decode with canonicalizing encode; duplicate-key policy disabled (raise-by-default).
 
 ## Success Criteria *(mandatory)*
 
