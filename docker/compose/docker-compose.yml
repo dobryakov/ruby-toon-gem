@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  gem:
+    build:
+      context: ../..
+      dockerfile: docker/gem.Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ../../gem:/usr/src/app
+    ports:
+      - "${GEM_PORT:-9401}:9401"
+    environment:
+      GEM_PORT: "${GEM_PORT:-9401}"
+    healthcheck:
+      test: ["CMD", "ruby", "-v"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - toon_net
+    command: ["tail", "-f", "/dev/null"]
+
+  rails_app:
+    build:
+      context: ../..
+      dockerfile: docker/rails.Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - ../../rails_app:/usr/src/app
+    env_file:
+      - ../../.env
+    ports:
+      - "${RAILS_PORT:-9402}:9402"
+    environment:
+      RAILS_ENV: test
+      RAILS_PORT: "${RAILS_PORT:-9402}"
+    depends_on:
+      - gem
+    healthcheck:
+      test: ["CMD", "ruby", "-v"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - toon_net
+    command: ["tail", "-f", "/dev/null"]
+
+networks:
+  toon_net:
+    driver: bridge
+
+

@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build containers
+        run: docker-compose -f docker/compose/docker-compose.yml build
+
+      - name: Run gem specs
+        run: docker-compose -f docker/compose/docker-compose.yml run --rm gem rake spec
+
+      - name: Run Rails specs
+        run: docker-compose -f docker/compose/docker-compose.yml run --rm rails_app bundle exec rspec
+
+

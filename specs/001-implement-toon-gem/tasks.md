@@ -24,11 +24,11 @@ Every task uses:
 
 **Purpose**: Initialize repository structure, Docker setup, and environment configuration.
 
-- [ ] T001 Create base project directories `docker/`, `docker/compose/`, `gem/`, and `rails_app/` at `/home/ubuntu/ruby-toon-gem/`
-- [ ] T002 [P] Create base gem container definition in `/home/ubuntu/ruby-toon-gem/docker/gem.Dockerfile` targeting Ruby 3.2.x
-- [ ] T003 [P] Create base Rails app container definition in `/home/ubuntu/ruby-toon-gem/docker/rails.Dockerfile` targeting Ruby 3.2.x and Rails 7.1.x
-- [ ] T004 Create environment template with non-standard ports in `/home/ubuntu/ruby-toon-gem/env.example` (e.g., `GEM_PORT`, `RAILS_PORT`)
-- [ ] T005 [P] Create docker-compose configuration with `gem` and `rails_app` services in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
+- [X] T001 Create base project directories `docker/`, `docker/compose/`, `gem/`, and `rails_app/` at `/home/ubuntu/ruby-toon-gem/`
+- [X] T002 [P] Create base gem container definition in `/home/ubuntu/ruby-toon-gem/docker/gem.Dockerfile` targeting Ruby 3.2.x
+- [X] T003 [P] Create base Rails app container definition in `/home/ubuntu/ruby-toon-gem/docker/rails.Dockerfile` targeting Ruby 3.2.x and Rails 7.1.x
+- [X] T004 Create environment template with non-standard ports in `/home/ubuntu/ruby-toon-gem/env.example` (e.g., `GEM_PORT`, `RAILS_PORT`)
+- [X] T005 [P] Create docker-compose configuration with `gem` and `rails_app` services in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
 
 ---
 
@@ -38,12 +38,12 @@ Every task uses:
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T006 Initialize gem structure with `Gemfile`, `Rakefile`, `toon.gemspec`, and `lib/toon/version.rb` in `/home/ubuntu/ruby-toon-gem/gem/`
-- [ ] T007 [P] Configure RSpec for the gem in `/home/ubuntu/ruby-toon-gem/gem/spec/spec_helper.rb` and `/home/ubuntu/ruby-toon-gem/gem/.rspec`
-- [ ] T008 [P] Initialize Rails 7.1 demo app skeleton in `/home/ubuntu/ruby-toon-gem/rails_app/` with minimal `Gemfile`, `config/`, and `app/` structure
-- [ ] T009 Configure docker-compose services (volumes, networks, commands) for `gem` and `rails_app` in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
-- [ ] T010 Configure application configuration loading from `.env` in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml` and `/home/ubuntu/ruby-toon-gem/rails_app/config/database.yml` (or equivalent)
-- [ ] T011 Setup CI workflow skeleton to run docker-compose-based tests in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
+- [X] T006 Initialize gem structure with `Gemfile`, `Rakefile`, `toon.gemspec`, and `lib/toon/version.rb` in `/home/ubuntu/ruby-toon-gem/gem/`
+- [X] T007 [P] Configure RSpec for the gem in `/home/ubuntu/ruby-toon-gem/gem/spec/spec_helper.rb` and `/home/ubuntu/ruby-toon-gem/gem/.rspec`
+- [X] T008 [P] Initialize Rails 7.1 demo app skeleton in `/home/ubuntu/ruby-toon-gem/rails_app/` with minimal `Gemfile`, `config/`, and `app/` structure
+- [X] T009 Configure docker-compose services (volumes, networks, commands) for `gem` and `rails_app` in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml`
+- [X] T010 Configure application configuration loading from `.env` in `/home/ubuntu/ruby-toon-gem/docker/compose/docker-compose.yml` and `/home/ubuntu/ruby-toon-gem/rails_app/config/database.yml` (or equivalent)
+- [X] T011 Setup CI workflow skeleton to run docker-compose-based tests in `/home/ubuntu/ruby-toon-gem/.github/workflows/ci.yml`
 
 **Checkpoint**: Foundation ready — gem, Rails app, Docker, and CI skeleton exist so user stories can start.
 

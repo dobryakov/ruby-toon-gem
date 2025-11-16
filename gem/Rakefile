@@ -1,0 +1,13 @@
+require "rake"
+
+begin
+  require "rspec/core/rake_task"
+
+  RSpec::Core::RakeTask.new(:spec)
+rescue LoadError
+  # RSpec not available yet; tasks will be defined after bundle install.
+end
+
+task default: :spec
+
+
