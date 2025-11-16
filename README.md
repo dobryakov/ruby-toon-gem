@@ -2,6 +2,8 @@
 
 A Ruby gem providing TOON-style encode/decode functionality with simple `encode` / `decode` APIs and containerized test setup.
 
+[![CI](https://github.com/dobryakov/ruby-toon-gem/actions/workflows/ci.yml/badge.svg)](https://github.com/dobryakov/ruby-toon-gem/actions/workflows/ci.yml)
+
 ## Installation
 
 Add this line to your application's `Gemfile`:
